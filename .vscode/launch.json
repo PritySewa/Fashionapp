@@ -13,6 +13,7 @@
         },
         {
             "name": "marketplace_admin",
+            "cwd": "apps\\admin_panel",
             "request": "launch",
             "type": "dart"
         },

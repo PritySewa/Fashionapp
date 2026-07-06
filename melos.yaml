@@ -1,5 +1,0 @@
-name: ecommerce_platform
-
-packages:
-  - apps/*
-  - packages/*
