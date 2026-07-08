@@ -1,0 +1,35 @@
+import 'package:flutter/material.dart';
+
+/// A full-screen centered loading indicator.
+///
+/// Usage:
+/// ```dart
+/// const AppLoading();
+/// ```
+class AppLoading extends StatelessWidget {
+  final String? message;
+
+  const AppLoading({super.key, this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const CircularProgressIndicator(),
+          if (message != null) ...[
+            const SizedBox(height: 16),
+            Text(
+              message!,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
