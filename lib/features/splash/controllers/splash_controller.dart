@@ -1,24 +1,30 @@
 import 'package:get/get.dart';
+import '../../../features/auth/repositories/auth_repository.dart';
+import '../../../routes/app_routes.dart';
 
 /// GetX controller for the Splash screen.
 ///
-/// Responsibilities (this phase):
-///   - Lifecycle management for the splash screen.
-///   - Navigation to login once ready (stubbed for now).
+/// Checks Firebase Authentication state synchronously in [onReady] and
+/// immediately replaces the splash route — no artificial delays.
 ///
-/// Future phases:
-///   - Check auth state via AuthRepository.
-///   - Route to dashboard if already logged in, otherwise to login.
+/// [AuthRepository] is resolved via [Get.find] because it is registered
+/// at the application level by [AppBinding] before any route runs.
 class SplashController extends GetxController {
-  // Phase 2 will override onInit() to check authentication state.
-  // Phase 2 will override onReady() to navigate after the check.
-  //
-  // Example:
-  //
-  // @override
-  // void onReady() {
-  //   super.onReady();
-  //   await Future.delayed(const Duration(seconds: 2));
-  //   Get.offAllNamed(AppRoutes.login);
-  // }
+  @override
+  void onReady() {
+    super.onReady();
+    _checkAuthAndNavigate();
+  }
+
+  void _checkAuthAndNavigate() {
+    final auth = Get.find<AuthRepository>();
+
+    if (auth.currentUser != null) {
+      // User already has an active Firebase session.
+      Get.offAllNamed(AppRoutes.dashboard);
+    } else {
+      // No active session — send to login.
+      Get.offAllNamed(AppRoutes.login);
+    }
+  }
 }
