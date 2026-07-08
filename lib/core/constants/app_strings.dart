@@ -31,4 +31,28 @@ abstract final class AppStrings {
   static const String errorGeneral = 'Something went wrong. Please try again.';
   static const String errorNetwork = 'No internet connection.';
   static const String emptyState = 'Nothing here yet.';
+
+  // ── Login screen ───────────────────────────────────────────────────────────
+  static const String loginHeading = 'Admin Panel';
+  static const String loginWelcome = 'Welcome back! Sign in to your account.';
+  static const String loginEmail = 'Email address';
+  static const String loginPassword = 'Password';
+  static const String loginButton = 'Sign In';
+  static const String loginRememberMe = 'Remember me';
+  static const String loginForgotPassword = 'Forgot password?';
+  static const String loginForgotPasswordMessage =
+      'Password reset will be available in the next authentication phase.';
+
+  // ── Auth errors ────────────────────────────────────────────────────────────
+  static const String authErrorInvalidCredentials =
+      'Invalid email or password. Please check your credentials and try again.';
+  static const String authErrorInvalidEmail = 'The email address is not valid.';
+  static const String authErrorUserDisabled =
+      'This account has been disabled. Please contact your administrator.';
+  static const String authErrorTooManyRequests =
+      'Too many failed attempts. Please wait a moment before trying again.';
+  static const String authErrorNetwork =
+      'Unable to connect. Please check your internet connection.';
+  static const String authErrorUnexpected =
+      'An unexpected error occurred. Please try again.';
 }

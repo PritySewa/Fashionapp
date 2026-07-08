@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../features/auth/bindings/login_binding.dart';
 import '../features/auth/views/dashboard_placeholder_view.dart';
 import '../features/auth/views/login_view.dart';
 import '../features/splash/bindings/splash_binding.dart';
@@ -24,11 +25,10 @@ abstract final class AppPages {
     ),
 
     // ── Login ─────────────────────────────────────────────────────────────────
-    // No binding: LoginView is a stateless placeholder in Phase 2A.
-    // LoginBinding will be added in Phase 2B when LoginController exists.
     GetPage(
       name: AppRoutes.login,
       page: () => const LoginView(),
+      binding: LoginBinding(),
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 300),
     ),
