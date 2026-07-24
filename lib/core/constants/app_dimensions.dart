@@ -35,13 +35,13 @@ abstract final class AppDimensions {
   static const double appBarHeight = 64;
 
   // ── Breakpoints (px) ──────────────────────────────────────────────────────
-  /// Mobile: < 600
-  static const double mobileBreakpoint = 600;
+  /// Mobile: < 768
+  static const double mobileBreakpoint = 768;
 
-  /// Tablet: 600 – 1024
-  static const double tabletBreakpoint = 1024;
+  /// Tablet: 768 – 1200
+  static const double tabletBreakpoint = 1200;
 
-  /// Desktop: > 1024
+  /// Desktop: >= 1200
   static const double desktopBreakpoint = 1440;
 
   // ── Card / Container ──────────────────────────────────────────────────────

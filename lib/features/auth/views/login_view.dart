@@ -32,18 +32,21 @@ class LoginView extends GetView<LoginController> {
             final isTablet = Responsive.isTablet(context);
 
             // Card max-width adapts to screen size
-            final cardWidth = isDesktop
-                ? 440.0
-                : isTablet
-                ? 400.0
-                : constraints.maxWidth;
-
             final horizontalPadding = Responsive.value<double>(
               context,
               desktop: 0,
               tablet: 0,
               mobile: AppDimensions.space5,
             );
+
+            // Card max-width adapts to screen size.
+            // On mobile we subtract padding×2 so the card never overflows
+            // the viewport when the ScrollView applies horizontal insets.
+            final cardWidth = isDesktop
+                ? 440.0
+                : isTablet
+                ? 400.0
+                : constraints.maxWidth - (horizontalPadding * 2);
 
             return Center(
               child: SingleChildScrollView(
@@ -52,7 +55,7 @@ class LoginView extends GetView<LoginController> {
                   vertical: AppDimensions.space8,
                 ),
                 child: SizedBox(
-                  width: cardWidth,
+                  width: cardWidth.clamp(0.0, double.infinity),
                   child: _LoginCard(isDark: isDark, theme: theme),
                 ),
               ),

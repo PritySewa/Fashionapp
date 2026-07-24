@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '413372948643',
     projectId: 'shop-mvp-6ab3a',
     authDomain: 'shop-mvp-6ab3a.firebaseapp.com',
-    storageBucket: 'shop-mvp-6ab3a.firebasestorage.app',
+    storageBucket: 'shop-mvp-6ab3a.appspot.com',
     measurementId: 'G-TE6972LQPC',
   );
 }

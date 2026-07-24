@@ -8,18 +8,18 @@ import '../constants/app_dimensions.dart';
 /// if (Responsive.isDesktop(context)) { ... }
 /// ```
 abstract final class Responsive {
-  /// Returns `true` when width < 600 (mobile).
+  /// Returns `true` when width < 768 (mobile).
   static bool isMobile(BuildContext context) =>
       MediaQuery.sizeOf(context).width < AppDimensions.mobileBreakpoint;
 
-  /// Returns `true` when 600 <= width < 1024 (tablet).
+  /// Returns `true` when 768 <= width < 1200 (tablet).
   static bool isTablet(BuildContext context) {
     final w = MediaQuery.sizeOf(context).width;
     return w >= AppDimensions.mobileBreakpoint &&
         w < AppDimensions.tabletBreakpoint;
   }
 
-  /// Returns `true` when width >= 1024 (desktop).
+  /// Returns `true` when width >= 1200 (desktop).
   static bool isDesktop(BuildContext context) =>
       MediaQuery.sizeOf(context).width >= AppDimensions.tabletBreakpoint;
 

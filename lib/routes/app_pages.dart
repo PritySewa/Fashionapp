@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
 import '../features/auth/bindings/login_binding.dart';
-import '../features/auth/views/dashboard_placeholder_view.dart';
 import '../features/auth/views/login_view.dart';
+import '../features/dashboard/bindings/dashboard_binding.dart';
+import '../features/dashboard/views/dashboard_view.dart';
 import '../features/splash/bindings/splash_binding.dart';
 import '../features/splash/views/splash_view.dart';
 import 'app_routes.dart';
@@ -33,12 +34,11 @@ abstract final class AppPages {
       transitionDuration: const Duration(milliseconds: 300),
     ),
 
-    // ── Dashboard (placeholder) ────────────────────────────────────────────────
-    // No binding: DashboardPlaceholderView is stateless in Phase 2A.
-    // DashboardBinding will be added in Phase 3 with the real Dashboard.
+    // ── Dashboard ─────────────────────────────────────────────────────────────
     GetPage(
       name: AppRoutes.dashboard,
-      page: () => const DashboardPlaceholderView(),
+      page: () => const DashboardView(),
+      binding: DashboardBinding(),
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 300),
     ),

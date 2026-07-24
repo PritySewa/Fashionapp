@@ -8,8 +8,12 @@ abstract final class AppStrings {
   // ── Navigation ─────────────────────────────────────────────────────────────
   static const String navDashboard = 'Dashboard';
   static const String navProducts = 'Products';
+  static const String navCategories = 'Categories';
   static const String navOrders = 'Orders';
   static const String navCustomers = 'Customers';
+  static const String navReviews = 'Reviews';
+  static const String navBadges = 'Badges';
+  static const String navBanners = 'Banners';
   static const String navAnalytics = 'Analytics';
   static const String navSettings = 'Settings';
 
@@ -55,4 +59,11 @@ abstract final class AppStrings {
       'Unable to connect. Please check your internet connection.';
   static const String authErrorUnexpected =
       'An unexpected error occurred. Please try again.';
+
+  // ── Startup authorization errors (set by SplashController) ─────────────────
+  static const String authStartupNotFound =
+      'You are not authorized to access the Admin Panel.';
+  static const String authStartupInactive = 'Your admin account is inactive.';
+  static const String authStartupError =
+      'Unable to verify admin access. Please try again.';
 }

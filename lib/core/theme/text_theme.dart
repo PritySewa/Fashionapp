@@ -4,7 +4,7 @@ import '../constants/app_colors.dart';
 import '../constants/app_dimensions.dart';
 
 /// Returns the [TextTheme] using Inter from Google Fonts.
-/// Used by both light and dark [ThemeData].
+/// Clean, legible typography with strong hierarchy for high-fashion aesthetics.
 TextTheme buildTextTheme({required bool isDark}) {
   final Color onSurface = isDark
       ? AppColors.textPrimaryDark
@@ -50,7 +50,7 @@ TextTheme buildTextTheme({required bool isDark}) {
       ),
       // Title
       titleLarge: TextStyle(
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: FontWeight.w600,
         color: onSurface,
       ),
@@ -109,11 +109,10 @@ TextTheme buildTextTheme({required bool isDark}) {
 }
 
 /// Common [InputDecorationTheme] shared between light and dark themes.
+/// Clean white background, subtle light border, 12px rounded corners.
 InputDecorationTheme buildInputDecorationTheme({required bool isDark}) {
   final Color border = isDark ? AppColors.borderDark : AppColors.borderLight;
-  final Color fill = isDark
-      ? AppColors.surfaceVariantDark
-      : AppColors.surfaceVariantLight;
+  final Color fill = isDark ? AppColors.surfaceDark : AppColors.surfaceLight;
 
   return InputDecorationTheme(
     filled: true,
@@ -123,23 +122,23 @@ InputDecorationTheme buildInputDecorationTheme({required bool isDark}) {
       vertical: AppDimensions.space3,
     ),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
       borderSide: BorderSide(color: border),
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
       borderSide: BorderSide(color: border),
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
       borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
     ),
     errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
       borderSide: const BorderSide(color: AppColors.error),
     ),
     focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(AppDimensions.radiusSm),
+      borderRadius: BorderRadius.circular(AppDimensions.radiusMd),
       borderSide: const BorderSide(color: AppColors.error, width: 1.5),
     ),
   );

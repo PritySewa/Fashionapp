@@ -1,17 +1,15 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'app_binding.dart';
+import 'core/firebase/firebase_init.dart';
 import 'core/theme/app_theme.dart';
-import 'firebase_options.dart';
 import 'routes/app_pages.dart';
 import 'routes/app_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Firebase is already connected — do NOT modify these two lines.
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await AppFirebaseInitializer.initialize();
 
   runApp(const MarketplaceAdminApp());
 }

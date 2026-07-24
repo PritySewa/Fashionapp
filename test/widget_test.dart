@@ -1,15 +1,30 @@
-// Widget tests for Marketplace Admin — Phase 2B
+// Widget tests for Marketplace Admin — Phase 2B / 2C.3
 //
 // Tests cover LoginView rendering, field presence, form validation,
 // and controller reactive state.
+//
 // Firebase Authentication is NOT tested here (requires integration tests
-// with real credentials). LoginController is tested with a mock/stub.
+// with real credentials). LoginController is tested with stubs for both
+// AuthRepository and AdminRepository.
+//
+// ## Phase 2C.3 note
+//
+// LoginController now calls Get.find<AdminRepository>() at field-initializer
+// time (controller construction). A _StubAdminRepository is therefore
+// registered before LoginController in _buildLoginView(). The stub's
+// checkAuthorization() always returns notFound, which is irrelevant to the
+// existing UI/form tests because those tests never successfully complete a
+// Firebase sign-in — the stub FirebaseAuth always throws invalid-credential.
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:marketplace_admin/core/constants/app_strings.dart';
+import 'package:marketplace_admin/core/enums/admin_authorization_status.dart';
+import 'package:marketplace_admin/features/admin/models/admin_model.dart';
+import 'package:marketplace_admin/features/admin/repositories/admin_repository.dart';
 import 'package:marketplace_admin/features/auth/controllers/login_controller.dart';
 import 'package:marketplace_admin/features/auth/repositories/auth_repository.dart';
 import 'package:marketplace_admin/features/auth/views/login_view.dart';
@@ -43,11 +58,38 @@ class _FakeFirebaseAuth extends Fake implements FirebaseAuth {
   Future<void> signOut() async {}
 }
 
+// ── Stub AdminRepository ──────────────────────────────────────────────────────
+// Required because LoginController now resolves AdminRepository via Get.find
+// at construction time. This stub never calls Firestore.
+//
+// checkAuthorization always returns notFound — which is safe for all existing
+// widget tests because they never reach a successful Firebase sign-in
+// (the FakeFirebaseAuth always throws invalid-credential).
+
+class _StubAdminRepository extends AdminRepository {
+  _StubAdminRepository() : super(firestore: _FakeFirestore());
+
+  @override
+  Future<({AdminAuthorizationStatus status, AdminModel? admin})>
+  checkAuthorization(String uid) async {
+    // Stub: always returns notFound. Not reached in existing widget tests
+    // because Firebase sign-in always fails first.
+    return (status: AdminAuthorizationStatus.notFound, admin: null);
+  }
+}
+
+// Minimal Firestore stand-in — only exists to satisfy the AdminRepository
+// constructor; its methods are never called via the stub override above.
+class _FakeFirestore extends Fake implements FirebaseFirestore {}
+
 // ── Helper ────────────────────────────────────────────────────────────────────
 
 Widget _buildLoginView() {
   // Register stub dependencies before building the view.
+  // Order matters: AuthRepository and AdminRepository must be registered
+  // before LoginController, which resolves both via Get.find at init time.
   Get.put<AuthRepository>(_StubAuthRepository(), permanent: true);
+  Get.put<AdminRepository>(_StubAdminRepository(), permanent: true);
   Get.put<LoginController>(LoginController());
 
   return const GetMaterialApp(home: LoginView());
